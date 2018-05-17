@@ -184,7 +184,6 @@ window.onload = function()
     game.player.health = 10; // Double as much life as enemies
     game.player.shootSpeed = 250; // Quadriple as fast as enemies
     game.player.bulletSpeed = 6; // Double as fast as enemies
-    game.player.isComputer = false; // Disable "artificial intelligence"
 
     // Create some enemies
     for (let i = 0; i < 10; i++)
@@ -236,26 +235,22 @@ game.update = function()
                 // Only if the unit is actually alive
                 if (unit.alive)
                 {
-                    // Only if unit is the playerBubbleAdd
-                    if (! unit.isComputer)
+                    if (game.physics.collideCircle(unit, bullet))
                     {
-                        if (game.physics.collideCircle(unit, bullet))
+                        // Damage the unit
+                        unit.health -= bullet.damage;
+
+                        // Destroy the unit if health is 0
+                        if (unit.health <= 0)
                         {
-                            // Damage the unit
-                            unit.health -= bullet.damage;
-
-                            // Destroy the unit if health is 0
-                            if (unit.health <= 0)
-                            {
-                                unit.destroy();
-                            }
-
-                            // Play hit sound
-                            game.audio.play('hit');
-
-                            // Destroy the bullet, so it doesn't hit again
-                            bullet.destroy();
+                            unit.destroy();
                         }
+
+                        // Play hit sound
+                        game.audio.play('hit');
+
+                        // Destroy the bullet, so it doesn't hit again
+                        bullet.destroy();
                     }
                 }
             }
@@ -331,7 +326,6 @@ game.Unit = function(x, y, color)
     this.shootNext = 0;
     this.shootSpeed = 1000;
     this.bulletSpeed = 3;
-    this.isComputer = true;
 
     let div = document.createElement('div');
     div.className = "sprite unit " + color;
