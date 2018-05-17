@@ -302,14 +302,14 @@ game.render = function()
 
         // Left / right
         if (targetX > game.camera.width / 2
-         && targetX < game.world.width - (game.camera.width / 2))
+         && targetX <= game.world.width - (game.camera.width / 2))
         {
             game.camera.x = targetX - (game.camera.width / 2);
         }
 
         // Top / bottom
         if (targetY > game.camera.height / 2
-         && targetY < game.world.height - (game.camera.height / 2))
+         && targetY <= game.world.height - (game.camera.height / 2))
         {
             game.camera.y = targetY - (game.camera.height / 2);
         }
