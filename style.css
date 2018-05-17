@@ -13,11 +13,13 @@ body
 a
 {
     color: #999999;
+    text-decoration: none;
 }
 
 a:hover
 {
     color: #ffffff;
+    text-decoration: underline;
 }
 
 a:active
@@ -43,6 +45,7 @@ main
              user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
     cursor: crosshair;
+    margin-bottom: 8px;
 }
 
 #divGame
@@ -128,7 +131,6 @@ main
 {
     position: absolute;
     left: 0px;
-    padding-top: 4px;
     text-align: left;
 }
 
@@ -136,7 +138,6 @@ main
 {
     position: absolute;
     right: 0px;
-    padding-top: 4px;
 }
 
 button
