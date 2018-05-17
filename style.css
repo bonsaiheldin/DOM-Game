@@ -1,0 +1,167 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    margin-top: 16px;
+    background-color: #111111;
+    font-size: 16px;
+    font-family: sans-serif;
+    color: #ffffff;
+    text-align: center;
+}
+
+a
+{
+    color: #999999;
+}
+
+a:hover
+{
+    color: #ffffff;
+}
+
+a:active
+{
+    color: #666666;
+}
+
+main
+{
+    position: relative;
+    margin: auto;
+}
+
+#divContainer
+{
+    position: relative;
+    overflow: hidden;
+    -webkit-touch-callout: none; /* iOS Safari */
+     -webkit-user-select: none; /* Safari */
+      -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+         -ms-user-select: none; /* Internet Explorer/Edge */
+             user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+    cursor: crosshair;
+}
+
+#divGame
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+#divGame .sprite
+{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    box-shadow: inset 0px 0px 0px 3px rgba(0, 0, 0, 0.25);
+}
+
+#divGame .sprite.unit
+{
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+}
+
+#divGame .sprite.unit.blue
+{
+    background-color: #0000ff;
+}
+
+#divGame .sprite.unit.red
+{
+    background-color: #ff0000;
+}
+
+#divGame .sprite.bullet
+{
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+}
+
+#divGame .sprite.bullet.blue
+{
+    background-color: #6666ff;
+}
+
+#divGame .sprite.bullet.red
+{
+    background-color: #ff6666;
+}
+
+
+#divWon,
+#divLost
+{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 960px;
+    height: 440px;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 32px;
+    text-align: center;
+    pointer-events: auto;
+    color: #ffffff;
+    display: none;
+    padding-top: 100px;
+}
+
+#divDebug
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 8px;
+    color: #111111;
+    pointer-events: none;
+    text-align: left;
+}
+
+#divControls
+{
+    position: absolute;
+    left: 0px;
+    padding-top: 4px;
+    text-align: left;
+}
+
+#divCreator
+{
+    position: absolute;
+    right: 0px;
+    padding-top: 4px;
+}
+
+button
+{
+    width: 128px;
+    height: 32px;
+    background: #ffffff;
+    border: 2px solid #666666;
+    border-bottom: 4px solid #333333;
+    border-radius: 16px;
+    outline: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #111111;
+}
+
+button:hover
+{
+    background: #eeeeee;
+}
+
+button:active
+{
+    height: 30px;
+    margin-top: 2px;
+    background: #dddddd;
+    border-bottom: 2px solid #333333;
+}
