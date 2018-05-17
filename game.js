@@ -236,22 +236,26 @@ game.update = function()
                 // Only if the unit is actually alive
                 if (unit.alive)
                 {
-                    if (game.physics.collideCircle(unit, bullet))
+                    // Only if unit is the playerBubbleAdd
+                    if (! unit.isComputer)
                     {
-                        // Damage the unit
-                        unit.health -= bullet.damage;
-
-                        // Destroy the unit if health is 0
-                        if (unit.health <= 0)
+                        if (game.physics.collideCircle(unit, bullet))
                         {
-                            unit.destroy();
+                            // Damage the unit
+                            unit.health -= bullet.damage;
+
+                            // Destroy the unit if health is 0
+                            if (unit.health <= 0)
+                            {
+                                unit.destroy();
+                            }
+
+                            // Play hit sound
+                            game.audio.play('hit');
+
+                            // Destroy the bullet, so it doesn't hit again
+                            bullet.destroy();
                         }
-
-                        // Play hit sound
-                        game.audio.play('hit');
-
-                        // Destroy the bullet, so it doesn't hit again
-                        bullet.destroy();
                     }
                 }
             }
