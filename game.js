@@ -13,6 +13,8 @@ let game =
     "time": {},
     "physics": {},
     "audio": {},
+    "camera": {},
+    "world": {},
     "gui": {}
 };
 
@@ -179,18 +181,37 @@ window.onload = function()
         game.mouse.isUp[e.button] = true;
     }, false);
 
+    // Initialize camera
+    game.camera =
+    {
+        "x": 0,
+        "y": 0,
+        "width": game.width,
+        "height": game.height,
+        "target": null
+    };
+
+    // Initialize world
+    game.world =
+    {
+        "width": game.width * 2,
+        "height": game.height * 2
+    };
+
     // Create the player
     game.player = new game.Unit(game.width / 2, game.height / 2, "blue");
     game.player.health = 10; // Double as much life as enemies
     game.player.shootSpeed = 250; // Quadriple as fast as enemies
     game.player.bulletSpeed = 6; // Double as fast as enemies
 
+    game.camera.target = game.player;
+
     // Create some enemies
     for (let i = 0; i < 10; i++)
     {
-        let x = game.math.integerInRange(0, game.width);
-        let y = game.math.integerInRange(0, game.height);
-        let unit = new game.Unit(x, y, "red");
+        let x = game.math.integerInRange(0, game.world.width);
+        let y = game.math.integerInRange(0, game.world.height);
+        new game.Unit(x, y, "red");
     }
 
     // Start update and render loops
@@ -273,12 +294,38 @@ game.render = function()
         bullet.render();
     }
 
+    // Camera follow
+    if (game.camera.target !== null)
+    {
+        let targetX = game.camera.target.x;
+        let targetY = game.camera.target.y;
+
+        // Left / right
+        if (targetX > game.camera.width / 2
+         && targetX < game.world.width - (game.camera.width / 2))
+        {
+            game.camera.x = targetX - (game.camera.width / 2);
+        }
+
+        // Top / bottom
+        if (targetY > game.camera.height / 2
+         && targetY < game.world.height - (game.camera.height / 2))
+        {
+            game.camera.y = targetY - (game.camera.height / 2);
+        }
+
+        // Transform the canvas div
+        game.gui.canvas.style.left = -game.camera.x;
+        game.gui.canvas.style.top  = -game.camera.y;
+    }
+
     // Show ingame GUI and debug stuff
     game.gui.divDebug.innerHTML = ""
     + "Health: " + game.player.health
     + "<br>Score: " + game.score
     + "<br>Units: " + game.Unit.count
-    + "<br>Bullets: " + game.Bullet.count;
+    + "<br>Bullets: " + game.Bullet.count
+    + "<br>Position: " + game.player.x + " / " + game.player.y
 };
 
 game.controls = function()
@@ -365,7 +412,8 @@ game.Unit.prototype.update = function()
             }
         }
     }
-    // Collision with game bounds
+
+    // Collision with world bounds
 
     // Left
     if (this.x < (this.width / 2))
@@ -374,9 +422,9 @@ game.Unit.prototype.update = function()
     }
 
     // Right
-    if (this.x + (this.width / 2) > game.width)
+    if (this.x + (this.width / 2) > game.world.width)
     {
-        this.x = game.width - (this.width / 2);
+        this.x = game.world.width - (this.width / 2);
     }
 
     // Top
@@ -386,9 +434,9 @@ game.Unit.prototype.update = function()
     }
 
     // Bottom
-    if (this.y + (this.height / 2) > game.height)
+    if (this.y + (this.height / 2) > game.world.height)
     {
-        this.y = game.height - (this.height / 2);
+        this.y = game.world.height - (this.height / 2);
     }
 };
 
@@ -497,9 +545,9 @@ game.Bullet.prototype.update = function()
 
     // Bullet should be destroyed if leaving game world
     if (this.x < (this.width / 2)
-     || this.x > game.width + (this.width / 2)
+     || this.x > game.world.width + (this.width / 2)
      || this.y < (this.height / 2)
-     || this.y > game.height + (this.height / 2))
+     || this.y > game.world.height + (this.height / 2))
     {
         this.destroy();
     }

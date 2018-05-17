@@ -46,6 +46,7 @@ main
                                   supported by Chrome and Opera */
     cursor: crosshair;
     margin-bottom: 8px;
+    background-color: #ffffff;
 }
 
 #divGame
@@ -53,7 +54,6 @@ main
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: #ffffff;
 }
 
 #divGame .sprite
