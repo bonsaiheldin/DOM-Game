@@ -61,7 +61,6 @@ main
     position: absolute;
     left: 0px;
     top: 0px;
-    box-shadow: inset 0px 0px 0px 3px rgba(0, 0, 0, 0.25);
 }
 
 #divGame .sprite.unit
@@ -69,6 +68,7 @@ main
     width: 48px;
     height: 48px;
     border-radius: 24px;
+    box-shadow: inset 0px 0px 0px 3px rgba(0, 0, 0, 0.25);
 }
 
 #divGame .sprite.unit.blue
@@ -98,6 +98,17 @@ main
     background-color: #ff6666;
 }
 
+#divGame .sprite.particle
+{
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+}
+
+#divGame .sprite.particle.engine
+{
+    background-color: #dddddd;
+}
 
 #divWon,
 #divLost
