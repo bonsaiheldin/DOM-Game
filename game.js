@@ -509,7 +509,7 @@ game.Unit.prototype.destroy = function()
         game.audio.play('explosion');
 
         // All enemies defeated? Game won!
-        if (game.Unit.count === 1)
+        if (game.score === 10)
         {
             // Disable controls
             game.player.alive = false;
